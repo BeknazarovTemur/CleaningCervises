@@ -4,7 +4,7 @@
     </x-slot:title>
 
     <x-header>
-        Home
+        About
     </x-header>
 
     <!-- About Start -->
