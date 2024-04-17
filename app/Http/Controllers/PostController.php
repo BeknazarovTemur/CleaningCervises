@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -14,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::latest()->paginate(6);
         return view('posts.index')->with([
             'posts' => $posts
         ]);
@@ -91,8 +92,13 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
-        //
+        if (isset($post->photo)) {
+            Storage::delete($post->photo);
+        }
+
+        $post->delete();
+        return redirect()->route('posts.index');
     }
 }
