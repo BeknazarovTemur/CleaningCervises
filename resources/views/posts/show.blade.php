@@ -21,25 +21,12 @@
                             <span class="text-primary px-2">|</span>
                             <a class="text-secondary text-uppercase font-weight-medium" href="">{{ $post->created_at }}</a>
                         </div>
-                        <h1 class="section-title mb-3">Amet sit kasd ipsum lorem clita ipsum duo clita</h1>
+                        <h1 class="section-title mb-3">{{ $post->short_content }}</h1>
                     </div>
 
                     <div class="mb-5">
                         <img class="img-fluid rounded w-100 mb-4" src="/img/carousel-1.jpg" alt="Image">
-                        <p>Sadipscing labore amet rebum est et justo gubergren. Et eirmod ipsum sit diam ut magna lorem.
-                            Nonumy vero labore lorem sanctus rebum et lorem magna kasd, stet amet magna accusam
-                            consetetur
-                            eirmod. Kasd accusam sit ipsum sadipscing et at at sanctus et. Ipsum sit gubergren dolores
-                            et,
-                            consetetur justo invidunt at et aliquyam ut et vero clita. Diam sea sea no sed dolores diam
-                            nonumy, gubergren sit stet no diam kasd vero.</p>
-                        <p>Voluptua est takimata stet invidunt sed rebum nonumy stet, clita aliquyam dolores vero stet
-                            consetetur elitr takimata rebum sanctus. Sit sed accusam stet sit nonumy kasd diam dolores,
-                            sanctus lorem kasd duo dolor dolor vero sit et. Labore ipsum duo sanctus amet eos et.
-                            Consetetur
-                            no sed et aliquyam ipsum justo et, clita lorem sit vero amet amet est dolor elitr, stet et
-                            no
-                            diam sit. Dolor erat justo dolore sit invidunt.</p>
+                        <p>{{ $post->contents }}</p>
                         <h2 class="mb-4">Est dolor lorem et ea</h2>
                     </div>
 

@@ -102,11 +102,11 @@
         <div class="col-lg-3 col-md-6 mb-5">
             <h4 class="font-weight-semi-bold text-primary mb-4">Quick Links</h4>
             <div class="d-flex flex-column justify-content-start">
-                <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
-                <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Services</a>
-                <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Projects</a>
-                <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                <a class="text-white mb-2" href="{{ route('main') }}"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                <a class="text-white mb-2" href="{{ route('about') }}"><i class="fa fa-angle-right mr-2"></i>About Us</a>
+                <a class="text-white mb-2" href="{{ route('service') }}"><i class="fa fa-angle-right mr-2"></i>Our Services</a>
+                <a class="text-white mb-2" href="{{ route('project') }}"><i class="fa fa-angle-right mr-2"></i>Our Projects</a>
+                <a class="text-white" href="{{ route('contact') }}"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 mb-5">
@@ -126,7 +126,7 @@
 <div class="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5" style="border-color: #3E3E4E !important;">
     <div class="row">
         <div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
-            <p class="m-0 text-white">&copy; <a href="#">Your Site Name</a>. All Rights Reserved. Designed by <a href="https://htmlcodex.com">HTML Codex</a>
+            <p class="m-0 text-white">&copy; <a href="#">Cleaning Services</a>. All Rights Reserved. Designed by <a href="https://htmlcodex.com">HTML Codex</a>
             </p>
         </div>
         <div class="col-lg-6 text-center text-md-right">
