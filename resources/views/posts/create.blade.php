@@ -14,7 +14,7 @@
                 <div class="col-lg-7 mb-5 mb-lg-0">
                     <div class="contact-form">
                         <div id="success"></div>
-                        <form action="{{ route('posts.store') }}" method="POST">
+                        <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="control-group mb-4">
                                 <input type="text" class="form-control p-4" name="title" value="{{ old('title') }}" placeholder="Title"/>
@@ -22,10 +22,12 @@
                                     <p class="help-block text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-{{--                            <div class="control-group mb-4">--}}
-{{--                                <input type="file" class="form-control p-4" id="photo" placeholder="Photo"/>--}}
-{{--                                <p class="help-block text-danger"></p>--}}
-{{--                            </div>--}}
+                            <div class="control-group mb-4">
+                                <input name="photo" type="file" class="form-control p-4" id="photo" placeholder="Photo"/>
+                                @error('photo')
+                                    <p class="help-block text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
                             <div class="control-group mb-4">
                                 <textarea class="form-control p-4" rows="3" name="short_content" placeholder="Short-content">{{ old('short_content') }}</textarea>
                                 @error('short_content')
