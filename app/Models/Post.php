@@ -15,4 +15,14 @@ class Post extends Model
         'contents',
         'photo'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

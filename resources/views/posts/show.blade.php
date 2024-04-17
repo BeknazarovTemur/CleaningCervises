@@ -1,7 +1,7 @@
 <x-layouts.main>
 
     <x-slot:title>
-        Post
+        Post-{{$post->id}}
     </x-slot:title>
 
     <x-header>
@@ -30,9 +30,8 @@
                             <span class="text-primary px-2">|</span>
                             <a class="text-secondary text-uppercase font-weight-medium" href="">{{ $post->created_at }}</a>
                         </div>
-                        <h1 class="section-title mb-3">{{ $post->short_content }}</h1>
+                        <h1 class="section-title mb-3">{{ $post->title }}</h1>
                     </div>
-
                     <div class="mb-5">
                         <img class="img-fluid rounded w-100 mb-4" src="{{ asset('storage/'.$post->photo) }}" alt="Image">
                         <p>{{ $post->contents }}</p>
@@ -128,21 +127,10 @@
                     </div>
                     <div class="mb-5">
                         <h3 class="mb-4 section-title">Recent Post</h3>
-                        <div class="d-flex align-items-center border-bottom mb-3 pb-3">
-                            <img class="img-fluid rounded" src="/img/blog-1.jpg" style="width: 80px; height: 80px; object-fit: cover;" alt="">
-                            <div class="d-flex flex-column pl-3">
-                                <a class="text-dark mb-2" href="">Elitr diam amet sit elitr magna ipsum ipsum dolor</a>
-                                <div class="d-flex">
-                                    <small><a class="text-secondary text-uppercase font-weight-medium" href="">Admin</a></small>
-                                    <small class="text-primary px-2">|</small>
-                                    <small><a class="text-secondary text-uppercase font-weight-medium" href="">Cleaning</a></small>
-                                </div>
-                            </div>
-                        </div>
-                        @foreach($recent_posts as $pots)
+                        @foreach($recent_posts as $post)
 
                             <div class="d-flex align-items-center border-bottom mb-3 pb-3">
-                                <img class="img-fluid rounded" src="/img/blog-2.jpg" style="width: 80px; height: 80px; object-fit: cover;" alt="">
+                                <img class="img-fluid rounded" src="{{ asset('storage/'.$post->photo) }}" style="width: 80px; height: 80px; object-fit: cover;" alt="">
                                 <div class="d-flex flex-column pl-3">
                                     <a class="text-dark mb-2" href="">{{ $post->title }}</a>
                                     <div class="d-flex">
