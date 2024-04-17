@@ -13,6 +13,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
+                    <div class="text-right">
+                        <a class="btn btn-sm btn-outline-dark" href="{{ route('posts.edit', ['post'=>$post]) }}">Edit</a>
+                        <a class="btn btn-sm btn-outline-danger" href="">Delete</a>
+                    </div>
                     <div class="mb-5">
                         <div class="d-flex mb-2">
                             <a class="text-secondary text-uppercase font-weight-medium" href="">Admin</a>
