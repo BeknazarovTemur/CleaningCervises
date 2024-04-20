@@ -1,7 +1,10 @@
 <?php
 
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\{
+    CommentController,
+    PostController,
+    PageController
+};
 use Illuminate\Support\Facades\Route;
 
 Route::controller(PageController::class)->group(function () {
@@ -12,5 +15,8 @@ Route::controller(PageController::class)->group(function () {
     Route::get('contact', 'contact')->name('contact');
 });
 
-Route::resource('posts', PostController::class);
+Route::resources([
+    'posts' => PostController::class,
+    'comments' => CommentController::class,
+]);
 
