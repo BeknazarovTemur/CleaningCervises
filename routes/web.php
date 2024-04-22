@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\{
+use App\Http\Controllers\
+{
     CommentController,
     PostController,
     PageController
@@ -17,6 +18,6 @@ Route::controller(PageController::class)->group(function () {
 
 Route::resources([
     'posts' => PostController::class,
-    'comments' => CommentController::class,
+    'comments' => CommentController::class
 ]);
 

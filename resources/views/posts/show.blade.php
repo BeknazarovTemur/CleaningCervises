@@ -29,6 +29,8 @@
                             <a class="text-secondary text-uppercase font-weight-medium" href="">Cleaning</a>
                             <span class="text-primary px-2">|</span>
                             <a class="text-secondary text-uppercase font-weight-medium" href="">{{ $post->created_at }}</a>
+                            <span class="text-primary px-2">|</span>
+                            <a class="bg-secondary font-weight-medium px-2 py-1 rounded text-white" href="">{{ $post->category->name }}</a>
                         </div>
                         <h1 class="section-title mb-3">{{ $post->title }}</h1>
                     </div>

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -20,7 +22,9 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('posts.create');
+        return view('posts.create')->with([
+            'categories' => Category::all()
+        ]);
     }
 
     public function store(StorePostRequest $request)
@@ -30,9 +34,11 @@ class PostController extends Controller
             $path = $request->file('photo')->storeAs('post-photos', $name);
         }
         $post = Post::create([
-            'title' => $request -> title,
-            'short_content' => $request -> short_content,
-            'contents' => $request -> contents,
+            'user_id' => 1,
+            'category_id' => $request->get('category_id'),
+            'title' => $request -> get('title'),
+            'short_content' => $request -> get('short_content'),
+            'contents' => $request -> get('contents'),
             'photo' => $path ?? null
         ]);
         return redirect()->route('posts.index');
