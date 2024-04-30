@@ -13,18 +13,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="row mb-4">
-                        <a class="btn btn-sm btn-outline-dark mr-2" href="{{ route('posts.edit', ['post'=>$post]) }}">Edit</a>
-                        <form action="{{ route('posts.destroy', ['post'=>$post->id]) }}" method="POST"
-                              onsubmit="return confirm('Do you really want to delete the post?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
-                        </form>
-                    </div>
+                    @auth()
+                        <div class="row mb-4">
+                            <a class="btn btn-sm btn-outline-dark mr-2" href="{{ route('posts.edit', ['post'=>$post]) }}">Edit</a>
+                            <form action="{{ route('posts.destroy', ['post'=>$post->id]) }}" method="POST"
+                                  onsubmit="return confirm('Do you really want to delete the post?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
+                        </div>
+                    @endauth
                     <div class="mb-5">
                         <div class="d-flex mb-2">
-                            @foreach(@$post->tags as $tag)
+                            @foreach($post->tags as $tag)
                                 <a class="text-secondary text-uppercase font-weight-medium">{{ $tag->name }}</a>
                                 <span class="text-primary px-2">|</span>
                             @endforeach
@@ -41,63 +43,49 @@
                         <p>{{ $post->contents }}</p>
                         <h2 class="mb-4">Est dolor lorem et ea</h2>
                     </div>
-
                     <div class="mb-5">
+                        @auth()
                         <h3 class="mb-4 section-title">{{ $post->comments()->count() }} Comments</h3>
+                        @endauth
 
                         @foreach($post->comments as $comment)
-
                         <div class="media mb-4">
                             <img src="/img/user.jpg" alt="Image" class="img-fluid rounded-circle mr-3 mt-1" style="width: 45px;">
                             <div class="media-body">
                                 <h6>{{ $comment->user->name }}<small><i>{{ $comment->created_at }}</i></small></h6>
                                 <p>{{ $comment->body }}</p>
-{{--                                <button class="btn btn-sm btn-light">Reply</button>--}}
                             </div>
                         </div>
-
                         @endforeach
-
                     </div>
-
-                    <div class="bg-light rounded p-5">
-                        <h3 class="mb-4 section-title">Leave a comment</h3>
-                        <form action="{{ route('comments.store') }}" method="POST">
-                            @csrf
-{{--                            <div class="form-row">--}}
-{{--                                <div class="form-group col-sm-6">--}}
-{{--                                    <label for="name">Name *</label>--}}
-{{--                                    <input type="text" class="form-control" id="name">--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group col-sm-6">--}}
-{{--                                    <label for="email">Email *</label>--}}
-{{--                                    <input type="email" class="form-control" id="email">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label for="website">Website</label>--}}
-{{--                                <input type="url" class="form-control" id="website">--}}
-{{--                            </div>--}}
-
-                            <div class="form-group">
-                                <label for="message">Add a comment...</label>
-                                <textarea name="body" cols="30" rows="5" class="form-control"></textarea>
-                            </div>
-                            <input type="hidden" name="post_id" value="{{ $post->id }}">
-                            <div class="form-group mb-0">
-                                <input type="submit" value="Comment" class="btn btn-primary">
-                            </div>
-                        </form>
-                    </div>
+                        <div class="bg-light rounded p-5">
+                            <h3 class="mb-4 section-title">Leave a comment</h3>
+                            @auth()
+                                <form action="{{ route('comments.store') }}" method="POST">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="message">Add a comment...</label>
+                                        <textarea name="body" cols="30" rows="5" class="form-control"></textarea>
+                                    </div>
+                                    <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                    <div class="form-group mb-0">
+                                        <input type="submit" value="Comment" class="btn btn-primary">
+                                    </div>
+                                </form>
+                            @else
+                                <div>
+                                    If you want to comment
+                                    <a href="{{ route('login') }}">Login</a>
+                                </div>
+                            @endauth
+                        </div>
                 </div>
-
                 <div class="col-lg-4 mt-5 mt-lg-0">
                     <div class="d-flex flex-column text-center bg-secondary rounded mb-5 py-5 px-4">
                         <img src="/img/user.jpg" class="img-fluid rounded-circle mx-auto mb-3" style="width: 100px;">
-                        <h3 class="text-white mb-3">John Doe</h3>
+                        <h3 class="text-white mb-3">{{ $post->user->name }}</h3>
                         <p class="text-white m-0">Conset elitr erat vero dolor ipsum et diam, eos dolor lorem ipsum,
-                            ipsum
-                            ipsum sit no ut est. Guber ea ipsum erat kasd amet est elitr ea sit.</p>
+                            ipsum ipsum sit no ut est. Guber ea ipsum erat kasd amet est elitr ea sit.</p>
                     </div>
                     <div class="mb-5">
                         <div class="w-100">
@@ -167,5 +155,4 @@
         </div>
     </div>
     <!-- Detail End -->
-
 </x-layouts.main>

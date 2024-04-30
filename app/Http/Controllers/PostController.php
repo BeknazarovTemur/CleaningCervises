@@ -6,13 +6,19 @@ use App\Http\Requests\StorePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
-use Illuminate\Http\Request;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Storage;
 
-class PostController extends Controller
+class PostController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('auth', except: ['index', 'show']),
+        ];
+    }
+
     public function index()
     {
         $posts = Post::latest()->paginate(6);
@@ -36,7 +42,7 @@ class PostController extends Controller
             $path = $request->file('photo')->storeAs('post-photos', $name);
         }
         $post = Post::create([
-            'user_id' => 1,
+            'user_id' => auth()->user()->id(),
             'category_id' => $request->get('category_id'),
             'title' => $request -> get('title'),
             'short_content' => $request -> get('short_content'),
@@ -48,15 +54,6 @@ class PostController extends Controller
                 $post->tags()->attach($tag);
             }
         }
-//        if(isset($request->tags)) {
-//            if (is_array($request->tags)) {
-//                foreach ($request->tags as $tag) {
-//                    $post->tag()->attach($tag);
-//                }
-//            } else {
-//                $post->tag()->attach($request->tags);
-//            }
-//        }
         return redirect()->route('posts.index');
     }
 

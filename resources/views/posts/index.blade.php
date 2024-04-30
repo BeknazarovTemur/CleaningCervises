@@ -28,7 +28,7 @@
                             </div>
                         </div>
                         <div class="d-flex mb-2">
-                            @foreach(@$post->tags as $tag)
+                            @foreach($post->tags as $tag)
                                 <a class="text-secondary text-uppercase font-weight-medium">{{ $tag->name }}</a>
                                 <span class="text-primary px-2">|</span>
                             @endforeach
