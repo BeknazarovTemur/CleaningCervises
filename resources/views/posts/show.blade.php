@@ -14,6 +14,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     @auth()
+                        @canany(['update', 'delete'], $post)
                         <div class="row mb-4">
                             <a class="btn btn-sm btn-outline-dark mr-2" href="{{ route('posts.edit', ['post'=>$post]) }}">Edit</a>
                             <form action="{{ route('posts.destroy', ['post'=>$post->id]) }}" method="POST"
@@ -23,6 +24,7 @@
                                 <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
                             </form>
                         </div>
+                        @endcanany
                     @endauth
                     <div class="mb-5">
                         <div class="d-flex mb-2">
