@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostCreated;
 use App\Http\Requests\StorePostRequest;
+use App\Jobs\ChangePost;
+use App\Jobs\UploadBigFile;
+use App\Mail\MailPostCreated;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller implements HasMiddleware
@@ -55,6 +60,13 @@ class PostController extends Controller implements HasMiddleware
                 $post->tags()->attach($tag);
             }
         }
+
+        PostCreated::dispatch($post);
+
+        ChangePost::dispatch($post)->onQueue('uploading');
+
+        Mail::to($request->user())->queue((new MailPostCreated($post))->onQueue('sending-mails'));
+
         return redirect()->route('posts.index');
     }
 

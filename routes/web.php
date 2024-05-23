@@ -28,6 +28,6 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::resources([
     'posts' => PostController::class,
-    'comments' => CommentController::class
+    'comments' => CommentController::class,
 ]);
 
